@@ -43,8 +43,25 @@ def clone_repo(repo_url):
         shutil.rmtree(CLONE_DIR)
 
     print("📥 Cloning repository...")
-    Repo.clone_from(repo_url, CLONE_DIR)
-    print("✅ Repository cloned successfully\n")
+
+    try:
+        Repo.clone_from(repo_url, CLONE_DIR)
+        print("✅ Repository cloned successfully\n")
+        return True
+
+    except Exception as e:
+        error_msg = str(e).lower()
+
+        if "authentication failed" in error_msg or "permission denied" in error_msg:
+            print("🔒 ERROR: This repository appears to be PRIVATE.")
+            print("👉 Please provide a public repository URL or configure authentication (GitHub token).")
+        elif "not found" in error_msg:
+            print("❌ ERROR: Repository not found. Please check the URL.")
+        else:
+            print("❌ ERROR: Unable to clone repository.")
+            print(f"Details: {e}")
+
+        return False
 
 # -----------------------------
 # SCAN FILES & DETECT LANGUAGES
@@ -88,7 +105,8 @@ def scan_files():
 def main():
     repo_url = input("🔗 Enter GitHub Repository URL: ").strip()
 
-    clone_repo(repo_url)
+    if not clone_repo(repo_url):
+        return
 
     files, js_count, py_count, skipped_files = scan_files()
 

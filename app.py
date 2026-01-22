@@ -1,5 +1,7 @@
 import re
 import os
+import json
+from collections import defaultdict
 
 # -----------------------------
 # CONFIGURATION
@@ -108,6 +110,72 @@ OWASP_TOP10_CHECKS = {
     }
 }
 
+OWASP_TOP50_MEAN_NEXT = {
+    # ---------- BACKEND (Node / Express / MongoDB) ----------
+    "NoSQL Injection (MongoDB)": {
+        "patterns": ["$where", "$ne", "$gt", "$regex", "find({", "findOne({"],
+        "severity": "Critical",
+        "message": "Possible NoSQL Injection via untrusted MongoDB query operators."
+    },
+    "Missing Input Validation (Express)": {
+        "patterns": ["req.body", "req.query", "req.params"],
+        "severity": "High",
+        "message": "User input is consumed without validation or schema enforcement."
+    },
+    "Insecure JWT Handling": {
+        "patterns": ["jwt.verify(", "jwt.decode("],
+        "severity": "High",
+        "message": "JWT verification may be missing algorithm or expiration checks."
+    },
+    "Hardcoded JWT Secret": {
+        "patterns": ["jwt.sign(", "secret =", "JWT_SECRET"],
+        "severity": "Critical",
+        "message": "Hardcoded JWT secret detected."
+    },
+    "Mass Assignment": {
+        "patterns": ["Object.assign(req.body", "new Model(req.body"],
+        "severity": "High",
+        "message": "Mass assignment vulnerability allowing unauthorized field updates."
+    },
+    "Insecure CORS Configuration": {
+        "patterns": ["cors()", "origin: '*'", "Access-Control-Allow-Origin"],
+        "severity": "Medium",
+        "message": "CORS configuration allows unrestricted cross-origin access."
+    },
+    "Unrestricted File Upload": {
+        "patterns": ["multer(", "upload.single", "upload.array"],
+        "severity": "High",
+        "message": "File upload detected without validation of type or size."
+    },
+
+    # ---------- FRONTEND (Angular / Next.js / React) ----------
+    "DOM-based XSS (Frontend)": {
+        "patterns": ["dangerouslySetInnerHTML", "innerHTML"],
+        "severity": "High",
+        "message": "Direct DOM manipulation may lead to DOM-based XSS."
+    },
+    "Client-Side Authentication Bypass": {
+        "patterns": ["if(isLoggedIn)", "localStorage.getItem('token')"],
+        "severity": "High",
+        "message": "Authentication enforced only on client-side logic."
+    },
+    "Insecure Storage of Sensitive Data": {
+        "patterns": ["localStorage.setItem", "sessionStorage.setItem"],
+        "severity": "Medium",
+        "message": "Sensitive data stored insecurely in browser storage."
+    },
+    "Open Redirect (Next.js)": {
+        "patterns": ["router.push(", "res.redirect(", "redirect("],
+        "severity": "Medium",
+        "message": "User-controlled redirects may enable phishing attacks."
+    },
+    "Missing CSRF Protection": {
+        "patterns": ["fetch(", "axios.post(", "axios.put("],
+        "severity": "High",
+        "message": "State-changing requests without CSRF protection detected."
+    }
+}
+
 # -----------------------------
 # REPOSITORY CONFIG
 # -----------------------------
@@ -144,6 +212,8 @@ def load_source_files():
 # -----------------------------
 # ANALYSIS ENGINE
 # -----------------------------
+findings = []
+
 print("🔍 Running Multi-Vulnerability Static Analysis\n")
 
 files = load_source_files()
@@ -192,6 +262,12 @@ for file_path, code in files:
             print(f"   Severity: High")
             print(f"   Vulnerability Type: Hardcoded Secret")
             print(f"   Line: {line}")
+            findings.append({
+                "name": "Hardcoded Secret",
+                "line": line_no,
+                "severity": "High",
+                "filename": file_path
+            })
 
         # 4️⃣ SINK CHECK FOR ALL VULNERABILITIES
         for vuln, info in VULNERABILITIES.items():
@@ -205,6 +281,12 @@ for file_path, code in files:
                     print(f"   Vulnerability Type: {vuln}")
                     print(f"   Tainted Variables: {tainted_used}")
                     print(f"   Code: {line}")
+                    findings.append({
+                        "name": vuln,
+                        "line": line_no,
+                        "severity": info["severity"],
+                        "filename": file_path
+                    })
 
         # 5️⃣ OWASP TOP 10 STATIC CHECKS
         for category, info in OWASP_TOP10_CHECKS.items():
@@ -216,6 +298,29 @@ for file_path, code in files:
                     print(f"   File: {file_path}")
                     print(f"   Line: {line_no}")
                     print(f"   Code: {line}")
+                    findings.append({
+                        "name": category,
+                        "line": line_no,
+                        "severity": info["severity"],
+                        "filename": file_path
+                    })
+
+        # 6️⃣ OWASP TOP 50 (MEAN / NEXT.JS) CHECKS
+        for category, info in OWASP_TOP50_MEAN_NEXT.items():
+            for pattern in info["patterns"]:
+                if pattern in line:
+                    print(f"\n🚨 OWASP Top-50 Issue Detected: {category}")
+                    print(f"   Severity: {info['severity']}")
+                    print(f"   Description: {info['message']}")
+                    print(f"   File: {file_path}")
+                    print(f"   Line: {line_no}")
+                    print(f"   Code: {line}")
+                    findings.append({
+                        "name": category,
+                        "line": line_no,
+                        "severity": info["severity"],
+                        "filename": file_path
+                    })
 
     if is_js_file:
         for issue, info in JS_STATIC_ISSUES.items():
@@ -224,6 +329,12 @@ for file_path, code in files:
                 print(f"   Issue: {issue}")
                 print(f"   Severity: {info['severity']}")
                 print(f"   Reason: {info['message']}")
+                findings.append({
+                    "name": issue,
+                    "line": None,
+                    "severity": info["severity"],
+                    "filename": file_path
+                })
 
         for line_no, line in enumerate(lines, start=1):
             for issue, info in JS_STATIC_ISSUES.items():
@@ -234,5 +345,33 @@ for file_path, code in files:
                         print(f"   Severity: {info['severity']}")
                         print(f"   Reason: {info['message']}")
                         print(f"   Code: {line}")
+                        findings.append({
+                            "name": issue,
+                            "line": line_no,
+                            "severity": info["severity"],
+                            "filename": file_path
+                        })
+
+grouped_report = defaultdict(list)
+
+for item in findings:
+    grouped_report[item["name"]].append({
+        "filename": item["filename"],
+        "line": item["line"],
+        "severity": item["severity"]
+    })
+
+final_report = []
+for category, occurrences in grouped_report.items():
+    final_report.append({
+        "category": category,
+        "count": len(occurrences),
+        "occurrences": occurrences
+    })
+
+with open("vulnexa_report.json", "w") as f:
+    json.dump(final_report, f, indent=4)
+
+print(f"\n📄 Structured & grouped JSON report generated: vulnexa_report.json")
 
 print("\n✅ Analysis Complete")

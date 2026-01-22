@@ -1,0 +1,589 @@
+[
+    {
+        "category": "Missing Strict Mode",
+        "count": 34,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/frontend/tailwind.config.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/frontend/vite.config.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/frontend/eslint.config.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/frontend/postcss.config.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/frontend/src/utils/toastConfig.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/frontend/src/constant/baseUrl.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/admin/index.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/admin/frontend/vite.config.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/admin/frontend/eslint.config.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/admin/route/auth_route.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/admin/protecter/protectCookie.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/admin/utils/generateCookie.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/config/cloundinary.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/admin/model/item_model.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/admin/db/dbconnect.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/admin/db/adminCol.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/healthcheck.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/server.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/middleware/validation.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/middleware/protectCookie.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/utils/generateCookie.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/controller/auth_control.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/controller/item_control.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/model/item_model.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/model/user_model.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/db/dbconnect.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/db/initializeDb.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/routes/payment_route.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/routes/item_route.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/routes/auth_Route.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/scripts/updateProductImages.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": null,
+                "severity": "Low"
+            }
+        ]
+    },
+    {
+        "category": "Unrestricted File Upload",
+        "count": 3,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/admin/route/auth_route.js",
+                "line": 7,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/route/auth_route.js",
+                "line": 10,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 44,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "Insecure JWT Handling",
+        "count": 3,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/admin/protecter/protectCookie.js",
+                "line": 26,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 179,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/middleware/protectCookie.js",
+                "line": 13,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "Broken Access Control",
+        "count": 9,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/admin/protecter/protectCookie.js",
+                "line": 40,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/protecter/protectCookie.js",
+                "line": 41,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/protecter/protectCookie.js",
+                "line": 46,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 19,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 20,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 23,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 29,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 189,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 193,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "NoSQL Injection (MongoDB)",
+        "count": 8,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/admin/protecter/protectCookie.js",
+                "line": 40,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 19,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 189,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 207,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/controller/auth_control.js",
+                "line": 9,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/controller/auth_control.js",
+                "line": 48,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/controller/item_control.js",
+                "line": 47,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/scripts/updateProductImages.js",
+                "line": 109,
+                "severity": "Critical"
+            }
+        ]
+    },
+    {
+        "category": "Hardcoded JWT Secret",
+        "count": 3,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/admin/utils/generateCookie.js",
+                "line": 4,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/utils/generateCookie.js",
+                "line": 4,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/utils/generateCookie.js",
+                "line": 4,
+                "severity": "Critical"
+            }
+        ]
+    },
+    {
+        "category": "Missing Input Validation (Express)",
+        "count": 14,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 13,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 48,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 51,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 109,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 129,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 130,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/admin/controller/auth_controller.js",
+                "line": 131,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/controller/auth_control.js",
+                "line": 8,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/controller/auth_control.js",
+                "line": 47,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/controller/item_control.js",
+                "line": 9,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/controller/item_control.js",
+                "line": 56,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/controller/item_control.js",
+                "line": 91,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/controller/item_control.js",
+                "line": 120,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/routes/payment_route.js",
+                "line": 9,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "Server-Side Request Forgery (SSRF)",
+        "count": 1,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/backend/middleware/validation.js",
+                "line": 105,
+                "severity": "Critical"
+            }
+        ]
+    },
+    {
+        "category": "Logging Failures",
+        "count": 1,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/backend/db/dbconnect.js",
+                "line": 13,
+                "severity": "Low"
+            }
+        ]
+    },
+    {
+        "category": "Cryptographic Failures",
+        "count": 13,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": 201,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": 207,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": 208,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": 259,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": 260,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 85,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 91,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 92,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 138,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 139,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 147,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 153,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 155,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "Insecure Randomness",
+        "count": 13,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": 201,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": 207,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": 208,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": 259,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": 260,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 85,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 91,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 92,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 138,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 139,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 147,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 153,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
+                "line": 155,
+                "severity": "Medium"
+            }
+        ]
+    },
+    {
+        "category": "Unsafe setTimeout / setInterval",
+        "count": 1,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/scripts/generateDummyData.js",
+                "line": 266,
+                "severity": "Medium"
+            }
+        ]
+    }
+]
