@@ -6,6 +6,13 @@ import os
 INPUT_FILE = "vulnexa_report.json"
 OUTPUT_FILE = "ai_prompts.json"
 
+SEVERITY_ORDER = {
+    "Critical": 1,
+    "High": 2,
+    "Medium": 3,
+    "Low": 4
+}
+
 def generate_master_prompt(grouped_findings):
     prompt = """
 You are a Principal Cybersecurity Engineer and Secure Software Architect.
@@ -18,16 +25,44 @@ of a JavaScript / Python (MEAN / Next.js) application.
 ━━━━━━━━━━━━━━━━━━━━━━
 """
 
+    # Sort categories by highest severity found in each category
+    def category_severity(item):
+        severities = [occ.get("severity", "Low") for occ in item.get("occurrences", [])]
+        return min(SEVERITY_ORDER.get(s, 4) for s in severities)
+
+    grouped_findings = sorted(grouped_findings, key=category_severity)
+
     for item in grouped_findings:
         category = item.get("category")
         occurrences = item.get("occurrences", [])
 
-        prompt += f"\n=== CATEGORY: {category} ===\n"
+        # Deduplicate occurrences
+        unique = {}
         for occ in occurrences:
+            line = occ.get("line")
+            if line is None:
+                line = "File-Level"
+
+            key = (occ.get("filename"), line, occ.get("severity"))
+            unique[key] = {
+                "filename": occ.get("filename"),
+                "line": line,
+                "severity": occ.get("severity")
+            }
+
+        prompt += f"\n=== CATEGORY: {category} ({len(unique)} occurrences) ===\n"
+
+        # Sort occurrences by severity
+        sorted_occurrences = sorted(
+            unique.values(),
+            key=lambda x: SEVERITY_ORDER.get(x["severity"], 4)
+        )
+
+        for occ in sorted_occurrences:
             prompt += (
-                f"- File: {occ.get('filename')} | "
-                f"Line: {occ.get('line')} | "
-                f"Severity: {occ.get('severity')}\n"
+                f"- File: {occ['filename']} | "
+                f"Line: {occ['line']} | "
+                f"Severity: {occ['severity']}\n"
             )
 
     prompt += """

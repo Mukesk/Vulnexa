@@ -1,0 +1,61 @@
+[
+  {
+    "category": "NoSQL Injection",
+    "count": 6,
+    "occurrences": [
+      { "filename": "src/api/userController.js", "line": 42, "severity": "Critical" },
+      { "filename": "src/api/userController.js", "line": 88, "severity": "High" },
+      { "filename": "src/services/queryBuilder.ts", "line": 17, "severity": "High" },
+      { "filename": "src/services/reportService.ts", "line": 63, "severity": "Medium" },
+      { "filename": "src/routes/userRoutes.ts", "line": 24, "severity": "Medium" },
+      { "filename": "src/routes/adminRoutes.ts", "line": 11, "severity": "Low" }
+    ]
+  },
+  {
+    "category": "Broken Access Control",
+    "count": 4,
+    "occurrences": [
+      { "filename": "src/middleware/authGuard.ts", "line": 30, "severity": "Critical" },
+      { "filename": "src/middleware/authGuard.ts", "line": 74, "severity": "High" },
+      { "filename": "src/controllers/adminAudit.ts", "line": 55, "severity": "High" },
+      { "filename": "src/controllers/projectController.ts", "line": 102, "severity": "Medium" }
+    ]
+  },
+  {
+    "category": "Cryptographic Failures",
+    "count": 3,
+    "occurrences": [
+      { "filename": "src/utils/crypto.ts", "line": 12, "severity": "High" },
+      { "filename": "src/utils/crypto.ts", "line": 47, "severity": "Medium" },
+      { "filename": "src/config/defaults.ts", "line": 19, "severity": "Low" }
+    ]
+  },
+  {
+    "category": "SSRF",
+    "count": 2,
+    "occurrences": [
+      { "filename": "src/services/webhookClient.ts", "line": 38, "severity": "Critical" },
+      { "filename": "src/services/webhookClient.ts", "line": 72, "severity": "High" }
+    ]
+  },
+  {
+    "category": "Hardcoded Secrets",
+    "count": 5,
+    "occurrences": [
+      { "filename": "src/config/dev.env", "line": 3, "severity": "High" },
+      { "filename": "src/config/test.env", "line": 5, "severity": "Medium" },
+      { "filename": "src/config/ci.env", "line": 2, "severity": "Medium" },
+      { "filename": "src/utils/awsClient.ts", "line": 29, "severity": "High" },
+      { "filename": "scripts/deploy.sh", "line": 8, "severity": "Low" }
+    ]
+  },
+  {
+    "category": "Missing Strict Mode",
+    "count": 3,
+    "occurrences": [
+      { "filename": "src/legacy/legacyAuth.js", "line": 5, "severity": "Medium" },
+      { "filename": "src/legacy/logger.js", "line": 11, "severity": "Low" },
+      { "filename": "src/legacy/migrations.js", "line": 2, "severity": "Low" }
+    ]
+  }
+]
