@@ -163,6 +163,7 @@ function App() {
     "[*] Awaiting repository URL input…"
   ]);
   const [exportingType, setExportingType] = useState<"JSON" | "PDF" | null>(null);
+  const [aiPrompt, setAiPrompt] = useState<string | null>(null);
 
   // Load static scan data after "scan" completes
   //   useEffect(() => {
@@ -248,6 +249,7 @@ function App() {
       const result = await response.json();
 
       setData(result.vulnerabilities);
+      setAiPrompt(result.ai_prompt);
       setStatus("COMPLETED");
       addLogLine(`[+] Scan completed. Risk Score: ${result.summary.riskScore}`);
       setToast({ message: "Security scan completed successfully.", type: "success" });
@@ -756,6 +758,37 @@ function App() {
                   </div>
                 </div>
               </div>
+
+              {/* AI Remediation Prompt */}
+              {status === "COMPLETED" && aiPrompt && (
+                <div className="glass-panel p-6 hover-glow">
+                  <h3 className="text-lg font-semibold uppercase tracking-wide text-slate-200 mb-4 flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-cyber-purple drop-shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
+                    AI Remediation Prompt
+                  </h3>
+                  <div className="relative">
+                    <div className="bg-slate-900/80 rounded-lg p-4 h-48 overflow-y-auto text-xs font-mono text-slate-400 border border-cyber-border/30">
+                      {aiPrompt}
+                    </div>
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(aiPrompt);
+                        setToast({ message: "Prompt copied to clipboard!", type: "success" });
+                      }}
+                      className="absolute top-2 right-2 p-2 bg-cyber-purple/20 hover:bg-cyber-purple/40 text-cyber-purple rounded-lg transition-colors border border-cyber-purple/30"
+                      title="Copy Prompt"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                      </svg>
+                    </button>
+                  </div>
+                  <p className="text-xs text-slate-500 mt-3">
+                    Copy this prompt into ChatGPT or Claude to get specific code fixes for these vulnerabilities.
+                  </p>
+                </div>
+              )}
             </aside>
           </div>
         </main>
