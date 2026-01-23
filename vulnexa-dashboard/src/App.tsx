@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import scanData from "./scanResults.json";
+// import scanData from "./scanResults.json";
 
 type Severity = "Critical" | "High" | "Medium" | "Low";
 type ScanStatus = "IDLE" | "SCANNING" | "COMPLETED";
@@ -165,10 +165,10 @@ function App() {
   const [exportingType, setExportingType] = useState<"JSON" | "PDF" | null>(null);
 
   // Load static scan data after "scan" completes
-  useEffect(() => {
-    if (status !== "COMPLETED") return;
-    setData(scanData as VulnerabilityCategory[]);
-  }, [status]);
+  //   useEffect(() => {
+  //     if (status !== "COMPLETED") return;
+  //     setData(scanData as VulnerabilityCategory[]);
+  //   }, [status]);
 
   const flatVulns = useMemo(
     () => buildFlatVulnList(data, categoryFilter),
@@ -211,7 +211,7 @@ function App() {
     setLogLines(prev => [...prev.slice(-50), `${new Date().toISOString().split('T')[1].split('.')[0]}  ${line}`]);
   }
 
-  function handleScan(e: React.FormEvent) {
+  async function handleScan(e: React.FormEvent) {
     e.preventDefault();
     if (!repoUrl.trim() || !isValidGitHubUrl(repoUrl.trim())) {
       setToast({ message: "Please provide a valid GitHub repository URL.", type: "error" });
@@ -220,16 +220,45 @@ function App() {
     setStatus("SCANNING");
     setData([]);
     setCategoryFilter(null);
+    setLogLines([]); // Clear previous logs
+
     addLogLine(`[*] Queued scan for ${repoUrl.trim()}`);
-    addLogLine("[*] Analyzing codebase structure and dependencies…");
-    setTimeout(() => addLogLine("[*] Running static analysis for injection vulnerabilities…"), 1000);
-    setTimeout(() => addLogLine("[*] Checking authentication and authorization flows…"), 1800);
-    setTimeout(() => addLogLine("[*] Scanning for hardcoded secrets and credentials…"), 2400);
-    setTimeout(() => {
+    addLogLine("[*] Connecting to Vulnexa Backend...");
+
+    try {
+      const response = await fetch("http://localhost:8000/api/scan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ repo_url: repoUrl.trim() })
+      });
+
+      if (!response.ok) {
+        let errorMsg = `Scan failed: ${response.statusText}`;
+        try {
+          const errorData = await response.json();
+          if (errorData.detail) {
+            errorMsg = errorData.detail;
+          }
+        } catch (e) {
+          // ignore json parse error
+        }
+        throw new Error(errorMsg);
+      }
+
+      const result = await response.json();
+
+      setData(result.vulnerabilities);
       setStatus("COMPLETED");
-      addLogLine("[+] Scan completed successfully. 23 vulnerabilities detected.");
-      setToast({ message: "Security scan completed — dashboard updated.", type: "success" });
-    }, 3200);
+      addLogLine(`[+] Scan completed. Risk Score: ${result.summary.riskScore}`);
+      setToast({ message: "Security scan completed successfully.", type: "success" });
+
+    } catch (error) {
+      console.error(error);
+      setStatus("IDLE");
+      const message = error instanceof Error ? error.message : "Unknown error";
+      addLogLine(`[!] Error: ${message}`);
+      setToast({ message: message, type: "error" });
+    }
   }
 
   function handleExportJson() {
@@ -238,9 +267,9 @@ function App() {
       return;
     }
     setExportingType("JSON");
-    const payload = { 
-      repository: repoUrl, 
-      scanTime: new Date().toISOString(), 
+    const payload = {
+      repository: repoUrl,
+      scanTime: new Date().toISOString(),
       vulnerabilities: data,
       summary: {
         totalVulns,
@@ -287,13 +316,12 @@ function App() {
       <div className="matrix-bg" />
       <div className="cyber-grid" />
       <div
-        className={`pointer-events-none fixed inset-0 mix-blend-screen opacity-30 blur-3xl ${
-          theme === "red" 
-            ? "bg-[radial-gradient(circle_at_top,_rgba(248,113,113,0.4),_transparent_60%)]" 
-            : theme === "ultra"
+        className={`pointer-events-none fixed inset-0 mix-blend-screen opacity-30 blur-3xl ${theme === "red"
+          ? "bg-[radial-gradient(circle_at_top,_rgba(248,113,113,0.4),_transparent_60%)]"
+          : theme === "ultra"
             ? "bg-[radial-gradient(circle_at_top,_rgba(177,88,255,0.35),_transparent_60%)]"
             : "bg-[radial-gradient(circle_at_top,_rgba(34,227,255,0.3),_transparent_60%)]"
-        }`}
+          }`}
       />
 
       <div className="relative z-10 flex min-h-screen flex-col">
@@ -305,7 +333,7 @@ function App() {
               <span className="text-sm font-black tracking-widest text-white">VX</span>
               <span className="absolute inset-0 rounded-xl border border-white/20" />
             </div>
-            
+
             {/* Title */}
             <div>
               <h1 className="text-xl font-bold tracking-[0.25em] uppercase gradient-text">
@@ -321,13 +349,12 @@ function App() {
             {/* Status Indicator */}
             <div className="flex items-center gap-3 rounded-full border border-cyber-border/70 bg-slate-900/60 px-4 py-2 text-sm">
               <span
-                className={`h-3 w-3 rounded-full ${
-                  status === "SCANNING"
-                    ? `bg-${themeAccent.primary} status-pulse`
-                    : status === "COMPLETED"
+                className={`h-3 w-3 rounded-full ${status === "SCANNING"
+                  ? `bg-${themeAccent.primary} status-pulse`
+                  : status === "COMPLETED"
                     ? "bg-emerald-400 shadow-neon-cyan"
                     : "bg-slate-500"
-                }`}
+                  }`}
               />
               <span className="tracking-wide uppercase text-slate-300 font-semibold">
                 {statusLabels[status]}
@@ -340,20 +367,18 @@ function App() {
                 <button
                   key={mode}
                   onClick={() => setTheme(mode)}
-                  className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wide transition-all ${
-                    theme === mode
-                      ? "bg-gradient-to-r from-cyber-red/60 via-cyber-purple/60 to-cyber-cyan/60 text-white shadow-neon-cyan"
-                      : "text-slate-400 hover:text-slate-100"
-                  }`}
+                  className={`relative flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wide transition-all ${theme === mode
+                    ? "bg-gradient-to-r from-cyber-red/60 via-cyber-purple/60 to-cyber-cyan/60 text-white shadow-neon-cyan"
+                    : "text-slate-400 hover:text-slate-100"
+                    }`}
                 >
                   <span
-                    className={`h-2 w-2 rounded-full ${
-                      mode === "dark"
-                        ? "bg-cyber-cyan"
-                        : mode === "ultra"
+                    className={`h-2 w-2 rounded-full ${mode === "dark"
+                      ? "bg-cyber-cyan"
+                      : mode === "ultra"
                         ? "bg-cyber-purple"
                         : "bg-cyber-red"
-                    }`}
+                      }`}
                   />
                   {mode === "dark" && "Dark"}
                   {mode === "ultra" && "Ultra"}
@@ -379,7 +404,7 @@ function App() {
                         Repository Security Analysis
                       </h2>
                       <p className="text-sm text-slate-400 leading-relaxed">
-                        Submit a GitHub repository URL to initiate a comprehensive security scan. VULNEXA will 
+                        Submit a GitHub repository URL to initiate a comprehensive security scan. VULNEXA will
                         analyze your codebase for vulnerabilities, security misconfigurations, and potential attack vectors.
                       </p>
                     </div>
@@ -490,7 +515,7 @@ function App() {
                         {(Object.entries(severityCounts) as [Severity, number][]).map(([severity, count]) => {
                           const maxCount = Math.max(...Object.values(severityCounts));
                           const percentage = maxCount > 0 ? (count / maxCount) * 100 : 0;
-                          
+
                           return (
                             <div key={severity} className="flex items-center gap-4">
                               <div className="w-20 text-sm font-semibold text-slate-300">
@@ -524,11 +549,10 @@ function App() {
                           <motion.button
                             key={cat.category}
                             onClick={() => setCategoryFilter(cat.category === categoryFilter ? null : cat.category)}
-                            className={`p-4 rounded-xl border transition-all text-left hover:scale-[1.02] ${
-                              categoryFilter === cat.category
-                                ? "border-cyber-cyan bg-cyber-cyan/10 shadow-neon-cyan"
-                                : "border-cyber-border bg-slate-800/40 hover:border-cyber-purple"
-                            }`}
+                            className={`p-4 rounded-xl border transition-all text-left hover:scale-[1.02] ${categoryFilter === cat.category
+                              ? "border-cyber-cyan bg-cyber-cyan/10 shadow-neon-cyan"
+                              : "border-cyber-border bg-slate-800/40 hover:border-cyber-purple"
+                              }`}
                             whileHover={{ y: -2 }}
                           >
                             <div className="flex items-center justify-between mb-2">
@@ -719,13 +743,12 @@ function App() {
                         key={index}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className={`${
-                          line.includes("[+]") 
-                            ? "text-emerald-400" 
-                            : line.includes("[*]") 
-                            ? "text-cyber-cyan" 
+                        className={`${line.includes("[+]")
+                          ? "text-emerald-400"
+                          : line.includes("[*]")
+                            ? "text-cyber-cyan"
                             : "text-slate-400"
-                        }`}
+                          }`}
                       >
                         {line}
                       </motion.div>
@@ -797,7 +820,7 @@ function App() {
                     Risk Assessment
                   </label>
                   <p className="text-slate-300 text-sm leading-relaxed">
-                    This {selectedVuln.category.toLowerCase()} vulnerability poses a {selectedVuln.occurrence.severity.toLowerCase()} 
+                    This {selectedVuln.category.toLowerCase()} vulnerability poses a {selectedVuln.occurrence.severity.toLowerCase()}
                     security risk to your application. Immediate remediation is recommended to prevent potential exploitation.
                   </p>
                 </div>
@@ -846,14 +869,12 @@ function App() {
             exit={{ opacity: 0, y: -100 }}
             className="fixed top-6 right-6 z-50"
           >
-            <div className={`glass-panel px-6 py-4 border-l-4 ${
-              toast.type === "success" 
-                ? "border-emerald-400 bg-emerald-500/10" 
-                : "border-red-400 bg-red-500/10"
-            }`}>
-              <p className={`text-sm font-medium ${
-                toast.type === "success" ? "text-emerald-200" : "text-red-200"
+            <div className={`glass-panel px-6 py-4 border-l-4 ${toast.type === "success"
+              ? "border-emerald-400 bg-emerald-500/10"
+              : "border-red-400 bg-red-500/10"
               }`}>
+              <p className={`text-sm font-medium ${toast.type === "success" ? "text-emerald-200" : "text-red-200"
+                }`}>
                 {toast.message}
               </p>
             </div>
