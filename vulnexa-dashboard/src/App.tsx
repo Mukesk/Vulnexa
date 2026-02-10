@@ -227,7 +227,11 @@ function App() {
     addLogLine("[*] Connecting to Vulnexa Backend...");
 
     try {
-      const response = await fetch("http://localhost:8000/api/scan", {
+      // Use relative URL for Vercel deployment (handled by rewrites)
+      // For local dev, Vite proxy should handle this or fallback to localhost if needed
+      const apiUrl = import.meta.env.PROD ? "/api/scan" : "http://localhost:8000/api/scan";
+
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ repo_url: repoUrl.trim() })
