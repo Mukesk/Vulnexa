@@ -15,6 +15,14 @@ VULNERABILITIES = {
         "sinks": ["db.query", "execute(", "cursor.execute"],
         "severity": "Critical"
     },
+    "NoSQL Injection": {
+        "sinks": ["findOne(", "find(", "update(", "deleteOne("],
+        "severity": "Critical"
+    },
+    "SSRF": {
+        "sinks": ["axios.get(", "fetch(", "requests.get("],
+        "severity": "Critical"
+    },
     "XSS": {
         "sinks": ["innerHTML", "document.write"],
         "severity": "High"
@@ -222,7 +230,7 @@ for file_path, code in files:
     print(f"\n📂 Scanning File: {file_path}")
     is_js_file = file_path.endswith(".js")
     strict_mode_found = False
-    tainted_vars = set()
+    tainted_vars = {}
     lines = code.split("\n")
 
     for line_no, line in enumerate(lines, start=1):
@@ -237,8 +245,13 @@ for file_path, code in files:
         if contains_any(line, SOURCES):
             var = extract_assigned_var(line)
             if var:
-                tainted_vars.add(var)
-                print(f"[Line {line_no}] SOURCE → '{var}' marked TAINTED")
+                source_type = next((s for s in SOURCES if s in line), "Unknown Source")
+                tainted_vars[var] = {
+                    "source": source_type,
+                    "line": line_no,
+                    "history": [f"Line {line_no}: Source identified via '{source_type}' assigned to '{var}'"]
+                }
+                print(f"[Line {line_no}] SOURCE → '{var}' marked TAINTED ({source_type})")
 
         # 2️⃣ DEEP TAINT PROPAGATION
         if "=" in line:
@@ -246,16 +259,44 @@ for file_path, code in files:
             rhs_vars = extract_vars(line)
 
             # If RHS uses tainted data and no sanitizer is applied
-            if lhs and any(v in tainted_vars for v in rhs_vars):
+            # Find the first tainted variable in RHS to trace back
+            tainted_source_var = next((v for v in rhs_vars if v in tainted_vars), None)
+
+            if lhs and tainted_source_var:
                 if not contains_any(line, TRUSTED_SANITIZERS):
-                    tainted_vars.add(lhs)
-                    print(f"[Line {line_no}] TAINT propagated → '{lhs}'")
+                    # Propagate taint info
+                    original_taint = tainted_vars[tainted_source_var]
+                    new_history = original_taint["history"].copy()
+                    new_history.append(f"Line {line_no}: Value propagated to '{lhs}'")
+                    
+                    tainted_vars[lhs] = {
+                        "source": original_taint["source"],
+                        "line": line_no,
+                        "history": new_history
+                    }
+                    print(f"[Line {line_no}] TAINT propagated → '{lhs}' (from '{tainted_source_var}')")
 
         # 2️⃣b FUNCTION ARGUMENT TAINT TRACKING
-        for var in list(tainted_vars):
-            if f"({var})" in line or f", {var}" in line:
-                tainted_vars.add(var)
-
+        # If a tainted variable is passed to a function, we don't necessarily taint the function name, 
+        # but if we were tracking function calls more deeply we would. 
+        # For now, we keep the existing simple logic but treating tainted_vars as dict keys works same as set.
+        # However, the previous logic was:
+        # for var in list(tainted_vars):
+        #     if f"({var})" in line or f", {var}" in line:
+        #         tainted_vars.add(var) 
+        # The previous logic seemed to re-add 'var' to tainted_vars if it was used in a function call?
+        # That doesn't make much sense for propagation unless it was 'func(var)' potentially modifying var? 
+        # Python sets check existence, so 'add' is idempotent.
+        # We will skip this specific block as it seems redundant or purely for side-effect printing which wasn't there.
+        # Actually, simpler: if a tainted var is used in a function arg, we might want to flag the function result as tainted?
+        # The original code was:
+        # for var in list(tainted_vars):
+        #    if f"({var})" in line or f", {var}" in line:
+        #        tainted_vars.add(var)
+        # This literally did nothing if var was already in the set.
+        # We will omitting it or implementing better logic?
+        # Let's stick to the propagation logic above (lhs = ... rhs...) which covers function returns if assigned.
+        
         # 3️⃣ HARD-CODED SECRET DETECTION
         if re.search(r"(API_KEY|SECRET|TOKEN|PASSWORD|AUTH_KEY)\s*=\s*['\"][^'\"]+['\"]", line):
             print(f"\n🚨 Hardcoded Secret Detected at line {line_no}")
@@ -281,11 +322,23 @@ for file_path, code in files:
                     print(f"   Vulnerability Type: {vuln}")
                     print(f"   Tainted Variables: {tainted_used}")
                     print(f"   Code: {line}")
+                    
+                    # Generate Exploit Path for the first tainted variable found
+                    taint_info = tainted_vars[tainted_used[0]]
+                    sink_name = next((s for s in info["sinks"] if s in line), "Unknown Sink")
+                    
+                    exploit_path = {
+                        "source": taint_info["source"],
+                        "sink": sink_name,
+                        "flow": taint_info["history"] + [f"Line {line_no}: Reached Sink '{sink_name}'"]
+                    }
+
                     findings.append({
                         "name": vuln,
                         "line": line_no,
                         "severity": info["severity"],
-                        "filename": file_path
+                        "filename": file_path,
+                        "exploit_path": exploit_path
                     })
 
         # 5️⃣ OWASP TOP 10 STATIC CHECKS
@@ -355,11 +408,15 @@ for file_path, code in files:
 grouped_report = defaultdict(list)
 
 for item in findings:
-    grouped_report[item["name"]].append({
+    entry = {
         "filename": item["filename"],
         "line": item["line"],
         "severity": item["severity"]
-    })
+    }
+    if "exploit_path" in item:
+        entry["exploit_path"] = item["exploit_path"]
+        
+    grouped_report[item["name"]].append(entry)
 
 final_report = []
 for category, occurrences in grouped_report.items():

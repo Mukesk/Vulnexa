@@ -30,6 +30,7 @@ app.add_middleware(
 # Models
 class ScanRequest(BaseModel):
     repo_url: str
+    branch: Optional[str] = None
 
 class Occurrence(BaseModel):
     filename: str
@@ -56,17 +57,53 @@ def cleanup():
         except Exception:
             pass
 
+def parse_github_url(url: str):
+    """
+    Parses a GitHub URL to extract the base repository URL and the branch name if present.
+    Example: https://github.com/user/repo/tree/branch -> (https://github.com/user/repo, branch)
+    """
+    if "/tree/" in url:
+        parts = url.split("/tree/")
+        base_url = parts[0]
+        branch_name = parts[1].split("/")[0]  # Take only the first part after tree/ as branch for now, or the whole rest?
+        # A branch can contain slashes, but usually 'tree' is followed by the branch name.
+        # If the URL is .../tree/feature/branch-name, parts[1] is feature/branch-name.
+        # So we should take the rest.
+        branch_name = parts[1]
+        
+        # Remove trailing slash if present
+        if branch_name.endswith("/"):
+            branch_name = branch_name[:-1]
+            
+        return base_url, branch_name
+    return url, None
+
 @app.get("/")
 def read_root():
     return {"status": "Vulnexa API is running"}
 
 @app.post("/api/scan", response_model=ScanResponse)
 def scan_repository(request: ScanRequest):
-    print(f"🚀 Received scan request for: {request.repo_url}")
+    repo_url = request.repo_url.strip()
+    branch = request.branch
+
+    # Fix common URL typos
+    if repo_url.startswith("ttps://"):
+        repo_url = "https://" + repo_url[7:]
+    elif repo_url.startswith("http://"):
+        repo_url = "https://" + repo_url[7:]
+
+    # Try to parse branch from URL if not provided
+    if not branch:
+        repo_url, extracted_branch = parse_github_url(repo_url)
+        if extracted_branch:
+            branch = extracted_branch
+            
+    print(f"🚀 Received scan request for: {repo_url} (Branch: {branch})")
     
     try:
         # 1. Clone
-        ClonerService.clone_repo(request.repo_url)
+        ClonerService.clone_repo(repo_url, branch)
         
         # 2. Scan
         findings = ScannerService.scan_codebase()

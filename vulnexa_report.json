@@ -1,337 +1,47 @@
 [
     {
-        "category": "Missing Strict Mode",
-        "count": 34,
-        "occurrences": [
-            {
-                "filename": "cloned_repo/frontend/tailwind.config.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/frontend/vite.config.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/frontend/eslint.config.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/frontend/postcss.config.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/frontend/src/utils/toastConfig.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/frontend/src/constant/baseUrl.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/admin/index.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/admin/frontend/vite.config.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/admin/frontend/eslint.config.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/admin/route/auth_route.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/admin/protecter/protectCookie.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/admin/utils/generateCookie.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/admin/controller/config/cloundinary.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/admin/model/item_model.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/admin/db/dbconnect.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/admin/db/adminCol.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/healthcheck.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/server.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/middleware/validation.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/middleware/protectCookie.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/utils/generateCookie.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/controller/auth_control.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/controller/item_control.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/model/item_model.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/model/user_model.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/db/dbconnect.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/db/initializeDb.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/routes/payment_route.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/routes/item_route.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/backend/routes/auth_Route.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/scripts/updateProductImages.js",
-                "line": null,
-                "severity": "Low"
-            },
-            {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": null,
-                "severity": "Low"
-            }
-        ]
-    },
-    {
-        "category": "Unrestricted File Upload",
-        "count": 3,
-        "occurrences": [
-            {
-                "filename": "cloned_repo/admin/route/auth_route.js",
-                "line": 7,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/admin/route/auth_route.js",
-                "line": 10,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 44,
-                "severity": "High"
-            }
-        ]
-    },
-    {
-        "category": "Insecure JWT Handling",
-        "count": 3,
-        "occurrences": [
-            {
-                "filename": "cloned_repo/admin/protecter/protectCookie.js",
-                "line": 26,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 179,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/backend/middleware/protectCookie.js",
-                "line": 13,
-                "severity": "High"
-            }
-        ]
-    },
-    {
-        "category": "Broken Access Control",
-        "count": 9,
-        "occurrences": [
-            {
-                "filename": "cloned_repo/admin/protecter/protectCookie.js",
-                "line": 40,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/admin/protecter/protectCookie.js",
-                "line": 41,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/admin/protecter/protectCookie.js",
-                "line": 46,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 19,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 20,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 23,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 29,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 189,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 193,
-                "severity": "High"
-            }
-        ]
-    },
-    {
-        "category": "NoSQL Injection (MongoDB)",
+        "category": "Vulnerable / Outdated Components",
         "count": 8,
         "occurrences": [
             {
-                "filename": "cloned_repo/admin/protecter/protectCookie.js",
-                "line": 40,
-                "severity": "Critical"
+                "filename": "cloned_repo/repo.py",
+                "line": 23,
+                "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 19,
-                "severity": "Critical"
+                "filename": "cloned_repo/repo.py",
+                "line": 27,
+                "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 189,
-                "severity": "Critical"
+                "filename": "cloned_repo/app.py",
+                "line": 92,
+                "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 207,
-                "severity": "Critical"
+                "filename": "cloned_repo/app.py",
+                "line": 92,
+                "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/backend/controller/auth_control.js",
-                "line": 9,
-                "severity": "Critical"
+                "filename": "cloned_repo/app.py",
+                "line": 92,
+                "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/backend/controller/auth_control.js",
-                "line": 48,
-                "severity": "Critical"
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 91,
+                "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/backend/controller/item_control.js",
-                "line": 47,
-                "severity": "Critical"
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 91,
+                "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/scripts/updateProductImages.js",
-                "line": 109,
-                "severity": "Critical"
-            }
-        ]
-    },
-    {
-        "category": "Hardcoded JWT Secret",
-        "count": 3,
-        "occurrences": [
-            {
-                "filename": "cloned_repo/admin/utils/generateCookie.js",
-                "line": 4,
-                "severity": "Critical"
-            },
-            {
-                "filename": "cloned_repo/backend/utils/generateCookie.js",
-                "line": 4,
-                "severity": "Critical"
-            },
-            {
-                "filename": "cloned_repo/backend/utils/generateCookie.js",
-                "line": 4,
-                "severity": "Critical"
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 91,
+                "severity": "Medium"
             }
         ]
     },
@@ -340,249 +50,1065 @@
         "count": 14,
         "occurrences": [
             {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 13,
+                "filename": "cloned_repo/app.py",
+                "line": 9,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 48,
+                "filename": "cloned_repo/app.py",
+                "line": 9,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 51,
+                "filename": "cloned_repo/app.py",
+                "line": 9,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 109,
+                "filename": "cloned_repo/app.py",
+                "line": 121,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 129,
+                "filename": "cloned_repo/app.py",
+                "line": 121,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 130,
+                "filename": "cloned_repo/app.py",
+                "line": 121,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/admin/controller/auth_controller.js",
-                "line": 131,
+                "filename": "cloned_repo/app.py",
+                "line": 136,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/backend/controller/auth_control.js",
+                "filename": "cloned_repo/backend/services/scanner.py",
                 "line": 8,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/backend/controller/auth_control.js",
-                "line": 47,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 8,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/backend/controller/item_control.js",
-                "line": 9,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 8,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/backend/controller/item_control.js",
-                "line": 56,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/backend/controller/item_control.js",
-                "line": 91,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/backend/controller/item_control.js",
+                "filename": "cloned_repo/backend/services/scanner.py",
                 "line": 120,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/backend/routes/payment_route.js",
-                "line": 9,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 120,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 120,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 135,
                 "severity": "High"
             }
         ]
     },
     {
-        "category": "Server-Side Request Forgery (SSRF)",
-        "count": 1,
+        "category": "Injection",
+        "count": 30,
         "occurrences": [
             {
-                "filename": "cloned_repo/backend/middleware/validation.js",
-                "line": 105,
+                "filename": "cloned_repo/app.py",
+                "line": 15,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 15,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 23,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 23,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 23,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 27,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 34,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 36,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 62,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 62,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 62,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 62,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 62,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 62,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 97,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 14,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 14,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 22,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 22,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 22,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 26,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 33,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 35,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 61,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 61,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 61,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 61,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 61,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 61,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 96,
                 "severity": "Critical"
             }
         ]
     },
     {
-        "category": "Logging Failures",
-        "count": 1,
+        "category": "DOM-based XSS (Frontend)",
+        "count": 6,
         "occurrences": [
             {
-                "filename": "cloned_repo/backend/db/dbconnect.js",
-                "line": 13,
-                "severity": "Low"
+                "filename": "cloned_repo/app.py",
+                "line": 19,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 153,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 153,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 18,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 152,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 152,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "Software / Data Integrity Failures",
+        "count": 14,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 27,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 34,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 36,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 62,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 97,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 97,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 97,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 26,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 33,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 35,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 61,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 96,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 96,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 96,
+                "severity": "Critical"
             }
         ]
     },
     {
         "category": "Cryptographic Failures",
-        "count": 13,
+        "count": 12,
         "occurrences": [
             {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": 201,
+                "filename": "cloned_repo/app.py",
+                "line": 49,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": 207,
+                "filename": "cloned_repo/app.py",
+                "line": 51,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": 208,
+                "filename": "cloned_repo/app.py",
+                "line": 87,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": 259,
+                "filename": "cloned_repo/app.py",
+                "line": 87,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": 260,
+                "filename": "cloned_repo/app.py",
+                "line": 87,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 85,
+                "filename": "cloned_repo/app.py",
+                "line": 87,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 91,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 48,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 92,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 50,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 138,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 86,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 139,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 86,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 147,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 86,
                 "severity": "High"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 153,
-                "severity": "High"
-            },
-            {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 155,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 86,
                 "severity": "High"
             }
         ]
     },
     {
-        "category": "Insecure Randomness",
-        "count": 13,
+        "category": "Broken Access Control",
+        "count": 8,
         "occurrences": [
             {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": 201,
+                "filename": "cloned_repo/app.py",
+                "line": 67,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 67,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 67,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 67,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 66,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 66,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 66,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 66,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "Security Misconfiguration",
+        "count": 8,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 72,
                 "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": 207,
+                "filename": "cloned_repo/app.py",
+                "line": 72,
                 "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": 208,
+                "filename": "cloned_repo/app.py",
+                "line": 72,
                 "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": 259,
+                "filename": "cloned_repo/app.py",
+                "line": 72,
                 "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": 260,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 71,
                 "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 85,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 71,
                 "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 91,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 71,
                 "severity": "Medium"
             },
             {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 92,
-                "severity": "Medium"
-            },
-            {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 138,
-                "severity": "Medium"
-            },
-            {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 139,
-                "severity": "Medium"
-            },
-            {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 147,
-                "severity": "Medium"
-            },
-            {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 153,
-                "severity": "Medium"
-            },
-            {
-                "filename": "cloned_repo/scripts/generateDummyDataSimple.js",
-                "line": 155,
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 71,
                 "severity": "Medium"
             }
         ]
     },
     {
-        "category": "Unsafe setTimeout / setInterval",
-        "count": 1,
+        "category": "Insecure Design",
+        "count": 8,
         "occurrences": [
             {
-                "filename": "cloned_repo/scripts/generateDummyData.js",
-                "line": 266,
+                "filename": "cloned_repo/app.py",
+                "line": 77,
                 "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 77,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 77,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 77,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 76,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 76,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 76,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 76,
+                "severity": "Medium"
+            }
+        ]
+    },
+    {
+        "category": "Authentication Failures",
+        "count": 8,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 82,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 82,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 82,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 82,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 81,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 81,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 81,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 81,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "Logging Failures",
+        "count": 6,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 102,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 102,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 102,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 101,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 101,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 101,
+                "severity": "Low"
+            }
+        ]
+    },
+    {
+        "category": "Server-Side Request Forgery (SSRF)",
+        "count": 10,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 107,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 107,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 107,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 107,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 173,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 106,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 106,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 106,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 106,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 172,
+                "severity": "Critical"
+            }
+        ]
+    },
+    {
+        "category": "Missing CSRF Protection",
+        "count": 8,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 107,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 173,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 173,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 173,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 106,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 172,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 172,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 172,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "NoSQL Injection (MongoDB)",
+        "count": 12,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 116,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 116,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 116,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 116,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 116,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 116,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 115,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 115,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 115,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 115,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 115,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 115,
+                "severity": "Critical"
+            }
+        ]
+    },
+    {
+        "category": "Insecure JWT Handling",
+        "count": 4,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 126,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 126,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 125,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 125,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "Hardcoded JWT Secret",
+        "count": 6,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 131,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 131,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 131,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 130,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 130,
+                "severity": "Critical"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 130,
+                "severity": "Critical"
+            }
+        ]
+    },
+    {
+        "category": "Mass Assignment",
+        "count": 4,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 136,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 136,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 135,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 135,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "Insecure CORS Configuration",
+        "count": 6,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 141,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 141,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 141,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 140,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 140,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 140,
+                "severity": "Medium"
+            }
+        ]
+    },
+    {
+        "category": "Unrestricted File Upload",
+        "count": 6,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 146,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 146,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 146,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 145,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 145,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 145,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "Client-Side Authentication Bypass",
+        "count": 4,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 158,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 158,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 157,
+                "severity": "High"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 157,
+                "severity": "High"
+            }
+        ]
+    },
+    {
+        "category": "Insecure Storage of Sensitive Data",
+        "count": 4,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 163,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 163,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 162,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 162,
+                "severity": "Medium"
+            }
+        ]
+    },
+    {
+        "category": "Open Redirect (Next.js)",
+        "count": 6,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 168,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 168,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/app.py",
+                "line": 168,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 167,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 167,
+                "severity": "Medium"
+            },
+            {
+                "filename": "cloned_repo/backend/services/scanner.py",
+                "line": 167,
+                "severity": "Medium"
+            }
+        ]
+    },
+    {
+        "category": "Missing Strict Mode",
+        "count": 3,
+        "occurrences": [
+            {
+                "filename": "cloned_repo/vulnexa-dashboard/tailwind.config.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/vulnexa-dashboard/eslint.config.js",
+                "line": null,
+                "severity": "Low"
+            },
+            {
+                "filename": "cloned_repo/vulnexa-dashboard/postcss.config.js",
+                "line": null,
+                "severity": "Low"
             }
         ]
     }

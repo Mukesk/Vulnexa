@@ -47,7 +47,8 @@ of a JavaScript / Python (MEAN / Next.js) application.
             unique[key] = {
                 "filename": occ.get("filename"),
                 "line": line,
-                "severity": occ.get("severity")
+                "severity": occ.get("severity"),
+                "exploit_path": occ.get("exploit_path")
             }
 
         prompt += f"\n=== CATEGORY: {category} ({len(unique)} occurrences) ===\n"
@@ -64,26 +65,40 @@ of a JavaScript / Python (MEAN / Next.js) application.
                 f"Line: {occ['line']} | "
                 f"Severity: {occ['severity']}\n"
             )
+            
+            if occ.get("exploit_path"):
+                ep = occ["exploit_path"]
+                prompt += (
+                    f"  🧨 EXPLOIT PATH:\n"
+                    f"     • Source: {ep.get('source', 'Unknown')}\n"
+                    f"     • Sink: {ep.get('sink', 'Unknown')}\n"
+                    f"     • Flow:\n"
+                )
+                for step in ep.get("flow", []):
+                    prompt += f"       ↓ {step}\n"
+                prompt += "\n"
 
     prompt += """
 ━━━━━━━━━━━━━━━━━━━━━━
 🎯 OBJECTIVE
 ━━━━━━━━━━━━━━━━━━━━━━
-Remediate ALL vulnerabilities above using ONE reusable fix strategy per category.
+Remediate ALL vulnerabilities above.
+For every vulnerability with an "EXPLOIT PATH", you MUST provide a "Human-Readable Exploit Narrative".
+Explain it like you are describing a heist: "The attacker inputs X, it travels through Y, and executes Z."
 
 ━━━━━━━━━━━━━━━━━━━━━━
 🛠️ REQUIRED OUTPUT (FOR EACH CATEGORY)
 ━━━━━━━━━━━━━━━━━━━━━━
-1️⃣ Vulnerability Overview  
-2️⃣ Real-World Exploit Scenario  
-3️⃣ Common Root Cause Across Files  
-4️⃣ Secure Design Principle Applied  
-5️⃣ Global Fix Strategy (Reusable)  
-6️⃣ BEFORE Code Pattern (Generic)  
-7️⃣ AFTER Code Pattern (Secure & Reusable)  
-8️⃣ Where to Apply This Fix (Controllers, Routes, UI, Config, etc.)  
-9️⃣ Common Developer Mistakes  
-🔟 Verification Checklist  
+1️⃣ Vulnerability Overview
+2️⃣ Human-Readable Exploit Narrative (Based on provided Exploit Path)
+3️⃣ Common Root Cause Across Files
+4️⃣ Secure Design Principle Applied
+5️⃣ Global Fix Strategy (Reusable)
+6️⃣ BEFORE Code Pattern (Generic)
+7️⃣ AFTER Code Pattern (Secure & Reusable)
+8️⃣ Where to Apply This Fix (Controllers, Routes, UI, Config, etc.)
+9️⃣ Common Developer Mistakes
+🔟 Verification Checklist
 
 ━━━━━━━━━━━━━━━━━━━━━━
 🔐 FIXING RULES
