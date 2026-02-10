@@ -335,9 +335,8 @@ function App() {
         <header className="flex items-center justify-between px-6 py-4 border-b border-cyber-border/60 bg-black/50 backdrop-blur-md">
           <div className="flex items-center gap-4">
             {/* Logo */}
-            <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-cyber-red via-cyber-purple to-cyber-cyan shadow-neon-cyan flex items-center justify-center">
-              <span className="text-sm font-black tracking-widest text-white">VX</span>
-              <span className="absolute inset-0 rounded-xl border border-white/20" />
+            <div className="relative h-12 w-12 rounded-xl shadow-neon-cyan flex items-center justify-center overflow-hidden border border-white/20">
+              <img src="/logo.png" alt="Vulnexa Logo" className="h-full w-full object-cover" />
             </div>
 
             {/* Title */}
