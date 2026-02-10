@@ -51,9 +51,11 @@ class ScanResponse(BaseModel):
 
 # Helpers
 def cleanup():
-    if os.path.exists("cloned_repo"):
+    import tempfile
+    clone_dir = os.path.join(tempfile.gettempdir(), "vulnexa_cloned_repo")
+    if os.path.exists(clone_dir):
         try:
-            shutil.rmtree("cloned_repo")
+            shutil.rmtree(clone_dir)
         except Exception:
             pass
 

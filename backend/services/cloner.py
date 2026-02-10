@@ -5,7 +5,12 @@ from git import Repo
 # -----------------------------
 # CONFIG
 # -----------------------------
-CLONE_DIR = "cloned_repo"
+# -----------------------------
+# CONFIG
+# -----------------------------
+import tempfile
+# Use designated temp directory for serverless compatibility (Vercel allows write only in /tmp)
+CLONE_DIR = os.path.join(tempfile.gettempdir(), "vulnexa_cloned_repo")
 
 class ClonerService:
     @staticmethod
