@@ -175,7 +175,9 @@ OWASP_TOP50_MEAN_NEXT = {
     }
 }
 
-CLONE_DIR = "cloned_repo"
+import tempfile
+# Use same temp directory as ClonerService
+CLONE_DIR = os.path.join(tempfile.gettempdir(), "vulnexa_cloned_repo")
 SUPPORTED_EXTENSIONS = (".js", ".py", ".ts", ".tsx", ".jsx") # Added TS/TSX/JSX support
 
 def contains_any(line, items):
