@@ -1,57 +1,71 @@
 import os
 import shutil
-from git import Repo
+import requests
+import zipfile
+import io
+import tempfile
 
 # -----------------------------
 # CONFIG
 # -----------------------------
-# -----------------------------
-# CONFIG
-# -----------------------------
-import tempfile
 # Use designated temp directory for serverless compatibility (Vercel allows write only in /tmp)
 CLONE_DIR = os.path.join(tempfile.gettempdir(), "vulnexa_cloned_repo")
 
 class ClonerService:
     @staticmethod
     def clone_repo(repo_url: str, branch: str = None) -> bool:
+        # Clean up previous clone
         if os.path.exists(CLONE_DIR):
             try:
-                # Handle permission errors by changing file modes before deletion
-                # This is common on Windows but good practice generally
                 def on_rm_error(func, path, exc_info):
                     os.chmod(path, 0o777)
                     func(path)
-                
                 shutil.rmtree(CLONE_DIR, onerror=on_rm_error)
             except Exception as e:
                 print(f"⚠️ Warning: Could not fully clean up {CLONE_DIR}: {e}")
 
-        print(f"📥 Cloning repository: {repo_url} (Branch: {branch or 'Default'})")
+        print(f"📥 Downloading repository: {repo_url} (Branch: {branch or 'Default'})")
 
-        max_retries = 3
-        for attempt in range(max_retries):
-            try:
-                if branch:
-                    Repo.clone_from(repo_url, CLONE_DIR, branch=branch)
-                else:
-                    Repo.clone_from(repo_url, CLONE_DIR)
-                print("✅ Repository cloned successfully")
-                return True
-            except Exception as e:
-                if attempt < max_retries - 1:
-                    print(f"⚠️ Attempt {attempt + 1} failed: {e}. Retrying in 2s...")
-                    import time
-                    time.sleep(2)
-                else:
-                   # Attempted all retries, raising only the specific useful error messages or the last one
-                    error_msg = str(e).lower()
-                    if "authentication failed" in error_msg or "permission denied" in error_msg:
-                        print("🔒 ERROR: This repository appears to be PRIVATE.")
-                        raise Exception("Private repository access denied. Please check URL or credentials.")
-                    elif "not found" in error_msg:
-                        print("❌ ERROR: Repository not found.")
-                        raise Exception("Repository not found.")
-                    else:
-                         print(f"❌ ERROR: Unable to clone repository after {max_retries} attempts: {e}")
-                         raise Exception(f"Failed to clone repository: {str(e)}")
+        # Construct ZIP URL
+        # Normal: https://github.com/user/repo
+        # Zip: https://github.com/user/repo/archive/refs/heads/branch.zip
+        # Default: https://github.com/user/repo/archive/HEAD.zip
+        
+        repo_url = repo_url.rstrip("/")
+        if branch:
+            zip_url = f"{repo_url}/archive/refs/heads/{branch}.zip"
+        else:
+            zip_url = f"{repo_url}/archive/HEAD.zip"
+
+        try:
+            print(f"⬇️ Fetching ZIP from: {zip_url}")
+            response = requests.get(zip_url, stream=True)
+            
+            if response.status_code == 404:
+                # Try master/main if default HEAD failed (unlikely for github)
+                 raise Exception("Branch or repository not found (404).")
+            elif response.status_code != 200:
+                raise Exception(f"Failed to download repository. Status: {response.status_code}")
+
+            # Extract ZIP
+            with zipfile.ZipFile(io.BytesIO(response.content)) as z:
+                # Extract to a temp dir first because GitHub zips have a top-level folder
+                with tempfile.TemporaryDirectory() as temp_extract_dir:
+                    z.extractall(temp_extract_dir)
+                    
+                    # Find the top-level directory (e.g. repo-main)
+                    extracted_folders = os.listdir(temp_extract_dir)
+                    if not extracted_folders:
+                         raise Exception("Downloaded ZIP archive is empty.")
+                    
+                    source_dir = os.path.join(temp_extract_dir, extracted_folders[0])
+                    
+                    # Move to CLONE_DIR
+                    shutil.copytree(source_dir, CLONE_DIR)
+
+            print("✅ Repository downloaded & extracted successfully")
+            return True
+
+        except Exception as e:
+            print(f"❌ ERROR: Download failed: {e}")
+            raise Exception(f"Failed to download repository: {str(e)}")
